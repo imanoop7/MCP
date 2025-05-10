@@ -4,12 +4,8 @@ from langgraph.prebuilt import create_react_agent
 from langchain_core.messages import SystemMessage, HumanMessage
 from langchain_ollama import ChatOllama
 from dotenv import load_dotenv
-load_dotenv()
 
-# Example query
-# "What is weather in newyork"
-# "What is FastMCP?"
-# "summarize this youtube video in 50 words, here is a video link: https://www.youtube.com/watch?v=2f3K43FHRKo"
+
 query = input("Query:")
 
 # Define llm
