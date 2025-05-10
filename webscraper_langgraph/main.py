@@ -1,9 +1,20 @@
-from mcp import ClientSession, StdioServerParameters
-from mcp.client.stdio import stdio_client
-from langchain_mcp_adapters import load_mcp_tools
+from langchain_mcp_adapters.client import MultiServerMCPClient
 from langgraph.prebuilt import create_react_agent
-from langchain_ollama import ChatOllama
-from dotenv import load_dotenv
-import os
 
-load_dotenv()
+client = MultiServerMCPClient(
+    {
+        "python-repl": {
+            "command": "python",
+            "args": ["python_tools.py"],
+            "transport": "stdio",
+        },
+        "weather": {
+             "command": "python",
+            "args": ["search_exa.py"],
+            "transport": "stdio",
+        }
+    }
+)
+agent = create_react_agent("openai:gpt-4.1", client.get_tools())
+math_response = agent.ainvoke({"messages": "what's (3 + 5) x 12?"})
+weather_response = agent.ainvoke({"messages": "what is the weather in nyc?"})
