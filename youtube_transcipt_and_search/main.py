@@ -23,7 +23,7 @@ async def run_agent():
             }, 
             "youtube_transcript": {
                 "command": "python",
-                "args": ["servers/yt_transcript.py"],
+                "args": ["youtube_transcript.py"],
                 "transport": "stdio",
             }
         }
